@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All User's</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Salary</th>
+    </tr>
+   </thead>
+    <tbody>
+    <tr th:each="user : ${allUser}">
+
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.department}"></td>
+        <td th:text="${user.salary}"></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<input type="button" value="Add"
+    onclick="window.location.href = 'addNewUser'"/>
+
+</body>
+</html>
