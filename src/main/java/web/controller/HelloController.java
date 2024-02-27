@@ -26,16 +26,6 @@ public class HelloController {
     }
 
 
-
-//    @GetMapping(value = "/")
-//    public String printWelcome(ModelMap model) {
-//        List<String> messages = new ArrayList<>();
-//        messages.add("Hello!");
-//        messages.add("it's my first CRUD APP ");
-//        model.addAttribute("messages", messages);
-//        return "index";
-//    }
-
     @GetMapping(value = "/")
     public String showAllUsers(Model model) {
 
@@ -53,20 +43,35 @@ public class HelloController {
 
         model.addAttribute("user", user);
 
-
         return "user-info";
     }
 
 
     @RequestMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user){
+    public String saveUser(@ModelAttribute("user") User user) {
 
         userService.saveUser(user);
 
         return "redirect:/";
     }
 
+    @RequestMapping("updateInfo")
+    public String updateUser(@RequestParam("id") int id, Model model) {
 
+        User user = userService.getUser(id);
+
+        model.addAttribute("user", user);
+
+        return "user-info";
+    }
+
+    @GetMapping("DeleteUser")
+    public String deleteUser(@RequestParam("id") int id){
+
+        userService.deleteUser(id);
+
+        return "redirect:/";
+    }
 
 }
 
