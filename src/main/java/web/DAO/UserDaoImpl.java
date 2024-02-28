@@ -8,66 +8,45 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDAO {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public User getUser(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        User user = session.get(User.class, id);
-        return user;
+        return entityManager.find(User.class, id);
     }
 
 
     @Override
     public List<User> getAllUsers() {
-
-        Session session = sessionFactory.getCurrentSession();
-        List<User> allUsers = session.createQuery("from User", User.class).getResultList();
-
-        return allUsers;
+        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     @Override
     public void saveUser(User user) {
-
-        Session session = sessionFactory.getCurrentSession();
-
         if (user.getId() == 0) {
-            session.save(user);
+            entityManager.persist(user);
         } else {
-            session.update(user);
+            entityManager.merge(user);
         }
-
-    }
-
-    @Override
-    public void updateUser(int id, User user) {
-        Session session = sessionFactory.getCurrentSession();
-
-        User user1 = getUser(id);
-
-        user.setName(user1.getName());
-        user.setDepartment(user1.getDepartment());
-        user.setSalary(user1.getSalary());
-
-        session.update(user);
-
     }
 
     @Override
     public void deleteUser(int id) {
 
-        Session session = sessionFactory.getCurrentSession();
 
-        User user = session.get(User.class, id);
-
-        session.delete(user);
+        User user = getUser(id);
+        if (user != null) {
+            entityManager.remove(user);
+        }
 
     }
 
