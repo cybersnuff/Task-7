@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <title>All User's</title>
     <style>
+
+
+        body {
+            background-color: #f0f0f0; /* Цвет заднего фона */
+            font-family: Arial, sans-serif; /* Шрифт по умолчанию */
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -23,14 +30,35 @@
         button {
             padding: 6px 12px;
             border: none;
-            background-color: #4CAF50;
+            background-color: #2196F3;
             color: white;
             cursor: pointer;
+            border-radius: 15px;
         }
+
 
         button:hover {
             background-color: #45a049;
         }
+
+        /* Изменение цвета кнопки Delete */
+        button.delete-button {
+            background-color: #f44336; /* Красный цвет */
+
+        }
+
+        button.delete-button:hover {
+            background-color: #d32f2f; /* Темно-красный цвет при наведении */
+        }
+
+        button.update-button {
+            background-color: #4CAF50; /* Зеленый цвет */
+        }
+        button.update-button:hover {
+            background-color: #45a049; /* Темно-зеленый цвет при наведении */
+        }
+
+
     </style>
 </head>
 <body>
@@ -52,12 +80,12 @@
         <td th:text="${user.salary}"></td>
         <td>
             <a th:href="@{/updateInfo(id=${user.id})}">
-                <button>Update</button>
+                <button class="update-button">Update</button>
             </a>
         </td>
         <td>
             <a th:href="@{/DeleteUser(id=${user.id})}">
-                <button>Delete</button>
+                <button class="delete-button">Delete</button>
             </a>
         </td>
     </tr>
