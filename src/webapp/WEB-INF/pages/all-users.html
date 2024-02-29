@@ -79,12 +79,12 @@
         <td th:text="${user.department}"></td>
         <td th:text="${user.salary}"></td>
         <td>
-            <a th:href="@{/updateInfo(id=${user.id})}">
+            <a th:href="@{/view(id=${user.id})}">
                 <button class="update-button">Update</button>
             </a>
         </td>
         <td>
-            <a th:href="@{/DeleteUser(id=${user.id})}">
+            <a th:href="@{/deleteUser(id=${user.id})}">
                 <button class="delete-button">Delete</button>
             </a>
         </td>

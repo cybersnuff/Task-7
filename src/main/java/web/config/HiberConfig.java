@@ -1,4 +1,4 @@
-package web.hiber;
+package web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,12 +8,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -22,7 +22,7 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScan(value = "web")
-public class AppConfig {
+public class HiberConfig {
 
     @Autowired
     private Environment env;
@@ -71,6 +71,4 @@ public class AppConfig {
 
         return properties;
     }
-
 }
-
